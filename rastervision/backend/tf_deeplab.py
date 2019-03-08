@@ -1,7 +1,6 @@
 import os
 import glob
-import shutil
-import tarfile
+import shutil import tarfile
 import uuid
 from typing import (Dict, List, Tuple)
 from os.path import join
@@ -657,7 +656,9 @@ class TFDeeplab(Backend):
                 eval_args = get_evaluation_args(eval_py, train_logdir_local,
                                                 dataset_dir_local, eval_logdir,
                                                 tfdl_config)
-                eval_process = Popen(eval_args, env=train_env)
+                eval_env = train_env.copy()
+                eval_env['CUDA_VISIBLE_DEVICES'] = '-1'
+                eval_process = Popen(eval_args, env=eval_env)
                 terminate_at_exit(eval_process)
 
             # Wait for training and tensorboard
