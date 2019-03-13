@@ -653,7 +653,7 @@ class TFDeeplab(Backend):
             if self.backend_config.train_options.do_eval:
                 # Start eval script
                 log.info('Starting eval script')
-                eval_logdir = train_logdir_local
+                eval_logdir = train_logdir_local + '/eval'
                 eval_args = get_evaluation_args(eval_py, train_logdir_local,
                                                 dataset_dir_local, eval_logdir,
                                                 tfdl_config)
